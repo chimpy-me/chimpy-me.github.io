@@ -8,13 +8,25 @@ image:
   alt: A Very Chimpy Unbirthday
 math: true
 author: <ray_voelker>
+pin: true
 ---
+
+**Update 2023-10-01** The implementation shown below is now available to install via [Python PIP](https://pypi.org/project/stochastic-pseudonymizer/): 
+
+```bash
+python3 -m pip install stochastic-pseudonymizer
+```
+
+View the source at [GitHub](https://github.com/chimpy-me/stochastic-pseudonymizer) and 
+discuss on [HackerNews](https://news.ycombinator.com/item?id=37696509)
+
+----
 
 ## Background
 
 I'm the Integrated Library System (ILS) Administrator for a [large public library system in Ohio](https://chpl.org). Libraries often struggle with data—being especially sensitive around data related to patrons and patron behavior in terms of borrowing, library program attendance, reference questions, etc. The common practice is for libraries to **aggregate and then promptly destroy this data** within a short time frame—which is typically one month. However, administrators and local government officials, who are often instrumental in allocating library funding and guiding operational strategies, frequently ask questions on a larger time scale than one month to validate the library's significance and its operational strategies. **Disaggregating this data to answer such questions is very difficult and arguably *impossible***. This puts people like me, and many others like me, in a tough spot in terms of storing and later using sensitive data to provide the answers to these questions of pretty serious consequence—like, what should we spend money on, or why we should continue to exist.
 
-![banned books](/banned-books.jpeg "read banned books"){: .right w="300"}
+![banned books](/banned-books.jpeg "read banned books"){: .w-50 .right width="1024" height="768"}
 
 I’m sure many readers are aware of the [many](https://en.wikipedia.org/wiki/McCarthyism) [interesting](https://en.wikipedia.org/wiki/National_security_letter#Connecticut_librarians_case) [historical](https://en.wikipedia.org/wiki/Patriot_Act) [reasons](https://en.wikipedia.org/wiki/Book_censorship_in_the_United_States) for this sensitivity, and organizations like the American Library Association (ALA) and other international library associations have even codified the protection of patron privacy into their codes of ethics. For example, the [ALA's Code of Ethics](https://www.ala.org/tools/ethics) states: 
 
@@ -38,11 +50,13 @@ records are valuable because they represent a wide range of things:
 * How we should re-balance number of existing copies among locations
 * ...and so on — the list goes on
 
-![Library Lending Cards](/lending-cards.jpeg "Olden Times" ){: .right w="300"}“Just anonymize the data!” you may be saying to yourself. Sure, this works to a degree, but then you lose the number of unique patrons, or how many patrons are borrowing certain genres, or how much of the overall patron population uses a subset of resources — again, the list goes on and on. We want to know "**the who**" but not "**who the who is specifically**", nor do we want to know or remember for all the reasons stated earlier.
+![Library Lending Cards](/lending-cards.jpeg "Olden Times" ){: .rounded-10 width="500" height="413" .w-50 .right}
+
+“Just anonymize the data!” you may be saying to yourself. Sure, this works to a degree, but then you lose the number of unique patrons, or how many patrons are borrowing certain genres, or how much of the overall patron population uses a subset of resources — again, the list goes on and on. We want to know "**the who**" but not "**who the who is specifically**", nor do we want to know or remember for all the reasons stated earlier.
 
 We need to strike a balance between 100% privacy protection of "having no data" and the statistical utility of "having data".
 
-![Description:The chart visualizes a curved line that demonstrates the inverse relationship between Privacy and Analytical Utility. The x-axis represents Analytical Utility, and the y-axis represents Privacy. Both axes range from 0 to Origin Point: At the bottom-right corner of the chart, where the Analytical Utility is at its maximum (1.0), the Privacy is at its minimum (almost 0). An annotation labeled "Original Data" is located near this point, signifying that when the data is in its original, unaltered state, it has maximum analytical utility but minimal privacy. End Point: At the top-left corner of the chart, where the Analytical Utility is at its minimum (almost 0), the Privacy is at its maximum (1.0). An annotation labeled "No Data" is located near this point, indicating that when no data is available or shared, privacy is maximized, but analytical utility is nullified. Mid Point: Approximately halfway along the curve, there's an annotation labeled "Compromise." This point symbolizes the balance or trade-off between preserving privacy and maintaining analytical utility. ](/privacy_vs_utility_chart.svg "the inverse relationship between Privacy and Analytical Utility"){: w="100%"}
+![Description:The chart visualizes a curved line that demonstrates the inverse relationship between Privacy and Analytical Utility. The x-axis represents Analytical Utility, and the y-axis represents Privacy. Both axes range from 0 to Origin Point: At the bottom-right corner of the chart, where the Analytical Utility is at its maximum (1.0), the Privacy is at its minimum (almost 0). An annotation labeled "Original Data" is located near this point, signifying that when the data is in its original, unaltered state, it has maximum analytical utility but minimal privacy. End Point: At the top-left corner of the chart, where the Analytical Utility is at its minimum (almost 0), the Privacy is at its maximum (1.0). An annotation labeled "No Data" is located near this point, indicating that when no data is available or shared, privacy is maximized, but analytical utility is nullified. Mid Point: Approximately halfway along the curve, there's an annotation labeled "Compromise." This point symbolizes the balance or trade-off between preserving privacy and maintaining analytical utility. ](/privacy_vs_utility_chart.svg "the inverse relationship between Privacy and Analytical Utility"){: width="720" height="432" .w-100}
 
 ## Pseudonymization
 
@@ -59,7 +73,7 @@ Something like the following could be used to link a pseudonym to a patron:
 | 1 | 2017-05-21 | Chimperson, Chimpy H | patron1 |
 | 2 | 2017-05-21 | Chimperson, Chimpy Jr | patron2 |
 | ... | ... | ... | ... |
-| 90042 | 2019-02-10 | Chimerson, Chimpette | patron90042 |
+| 90042 | 2019-02-10 | Chimperson, Chimpette | patron90042 |
 
 This may be good enough for most. But keep in mind the implications of doing it this way. In this example of pseudonymization, we're now required to maintain this extra data in the record itself, or in another lookup table so that any future data being processed produces the same consistent results. Also, in this particular implementation pseudonyms are being assigned to patrons as they're being created, revealing or "leaking" extra information about the patron that we may not feel comfortable with.
 
@@ -123,7 +137,7 @@ The other important thing to know about cryptographic hashing functions is that 
 
 It means that:
 
-> Every bit of a cryptographic hash is created equally, and **we can select as many, or as few a number of bits of the resulting hash value as we like! We can therefor control the number of "bins" that can be represent with the selected portion of the hash bits, and be virtually guaranteed even distribution across all of these bins**
+> Every bit of a cryptographic hash is created equally, and **we can select as many, or as few a number of bits of the resulting hash value as we like! We can therefor control the number of "bins" that can be represented with the selected portion of the hash bits, and be virtually guaranteed even distribution across all of these bins**
 {: .prompt-tip}
 
 ## The Birthday Paradox
@@ -145,13 +159,13 @@ print(count)  # 253
 
 So, "where am I going with this?", and "HOW *is* a raven like a *writing desk*?!" you may be asking dear reader. Hang tight while we break this down a little bit further — and at least answer that first question.
 
-![https://en.wikipedia.org/wiki/Birthday_problem#/media/File:Birthday_Paradox.svg](/the_birthday_paradox.svg "image from https://en.wikipedia.org/wiki/Birthday_problem#/media/File:Birthday_Paradox.svg"){: .right w="300"}
+![https://en.wikipedia.org/wiki/Birthday_problem#/media/File:Birthday_Paradox.svg](/the_birthday_paradox.svg "image from https://en.wikipedia.org/wiki/Birthday_problem#/media/File:Birthday_Paradox.svg"){: .right .w-50}
 
 <div>If you consider each birthday to be a "bucket" and that we ignore leap years, then how many people are required before you have a \(99.999\%\) <i>probability</i> that <b>any two</b> persons will share the same bucket, or birthday — <b>in other words, what sample size of the population is needed for there to be a VERY high likelyhood of collision?</b></div>
 
 There's a handy online calculator here at [kevingal.com/apps/collision.html](https://kevingal.com/apps/collision.html) to solve for some of these types of questions. I won't go too much into the math here, but it's interesting to play around with the numbers.
 
-![https://kevingal.com/apps/collision.html](/hash_collision_calculator1.png "https://kevingal.com/apps/collision.html"){: .right w="300"}
+![https://kevingal.com/apps/collision.html](/hash_collision_calculator1.png "https://kevingal.com/apps/collision.html"){: .right. w-50}
 So, as it turns out, the answer to the above question is a relatively low number — **only 90 people** are needed to be selected from the population before there is a very high degree of probability that they will land in the same bucket representing a birthday.
 
 To apply some other example numbers to this, and get a little bit closer to understanding how we can take this paradox and make use of it for our case — lets say we wanted to find out how many buckets we would need for the following:
@@ -219,6 +233,8 @@ C_approximated = n**2 / (2 * M)
 C_approximated  # 10.477378964424133
 ```
 
+The result of the approximation calculation is under 11 collisions — in a population size of 300,000 this helps us retain statistical utility, while increasing patron privacy compared to other pseudonymization techniques.
+
 ## Stochastic Pseudonymization
 
 I've termed this method 'Stochastic Pseudonymization' because it
@@ -230,13 +246,12 @@ associate pseudonyms with their original records. I believe it strikes
 a nice balance between patron privacy and statistical utility.
 
 ***Stochastic*** refers to the property of being well-described by a
-random probability distribution
-https://en.wikipedia.org/wiki/Stochastic
+random probability distribution. [https://en.wikipedia.org/wiki/Stochastic](https://en.wikipedia.org/wiki/Stochastic)
 
 ***Pseudonymization*** as we described earlier, refers to the
 technique where personally identifiable information fields within a
 data record are replaced by one or more artificial identifiers, or
-pseudonyms. https://en.wikipedia.org/wiki/Pseudonymization
+pseudonyms. [https://en.wikipedia.org/wiki/Pseudonymization](https://en.wikipedia.org/wiki/Pseudonymization)
 
 In the below Python implementation, I'm using the widely-used
 [cryptography library](https://github.com/pyca/cryptography), which
@@ -344,7 +359,7 @@ I'll take the Chimperson troupe from the example previously:
 | 1 | 2017-05-21 | Chimperson, Chimpy H | patron1 |
 | 2 | 2017-05-21 | Chimperson, Chimpy Jr | patron2 |
 | ... | ... | ... | ... |
-| 90042 | 2019-02-10 | Chimerson, Chimpette | patron90042 |
+| 90042 | 2019-02-10 | Chimperson, Chimpette | patron90042 |
 
 
 
@@ -371,7 +386,7 @@ patron_records = [
     {
         'id':90042, 
         'createdDate': '2019-02-10', 
-        'patronName': 'Chimerson, Chimpette'
+        'patronName': 'Chimperson, Chimpette'
     }    
 ]
 
@@ -388,8 +403,10 @@ And here are the tokens or pseudonyms produced!
 ```bash
 BFgC9Q
 31fGmw
-Eti4/g
+MOyHUA
 ```
+
+[GitHub Gist](https://gist.github.com/rayvoelker/56ff325286fd0b34870e82103a26bdb8)
 
 ## Thanks
 
@@ -409,4 +426,4 @@ Below you can find links to the show, show notes, and transcripts.
 * [www.grc.com/sn/SN-940-Notes.pdf](https://www.grc.com/sn/SN-940-Notes.pdf)
 * [twit.tv/posts/transcripts/security-now-940-transcript](https://twit.tv/posts/transcripts/security-now-940-transcript)
 
-![how is a raven like a writing desk](/how_is_a_raven_like_a_writing_desk.webp)
+![how is a raven like a writing desk](/how_is_a_raven_like_a_writing_desk.webp){: .w-100}
