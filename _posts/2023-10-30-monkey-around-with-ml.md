@@ -11,7 +11,7 @@ author: <ray_voelker>
 pin: false
 ---
 
-In this post -- and posts to follow -- I'm going to be learning about, and documenting many of the things around this current generation of Machine Learning and how it may be applied to some areas specific involving library data. 
+In this post -- and posts to follow -- I'm going to be documenting what I learn about this curren generation of Machine Learning and how it may be applied to some areas specifically involving library data.
 
 I'm going to take a look at some of the history behind areas of AI and machine learning, and again, hopefully, we can apply that history and background to that same type of work being done in libraries in the past, and today.
 
@@ -126,9 +126,18 @@ Given this embedding of the word "cat", we can now take other words and generate
 #### Cosine Similarity
 
 ![3D Visualization Description for "cat" and "feline" Embeddings: Imagine a three-dimensional space with axes X, Y, and Z. The origin, where all axes meet, represents the starting point of our vectors. From this origin, the vector for "cat" stretches out, pointing mostly towards the negative Y-direction, with a smaller positive component towards the X and Z directions. It's visualized as a blue arrow. Similarly, from the origin, the vector for "feline" also stretches out in a direction that's quite close to the "cat" vector. It too points mainly in the negative Y-direction with positive components in the X and Z directions, albeit slightly less pronounced than the "cat" vector. This is visualized as a red arrow. The closeness of the directions of these two arrows signifies that the words "cat" and "feline" have similar meanings or contexts in the embedding space. The angle between these two vectors is small, indicating a high degree of similarity between the two terms in the model's representation.](/3-d-embeddings-cat-feline.webp){: .w-50 .right} 
-A cosine is a trigonometric function of an angle, commonly used in geometry and trigonometry to provide the ratio of the adjacent side to the hypotenuse in a right triangle. Cosine Similarity is a mathematical method used to compare two embeddings and determine how similar they are in N-dimensional space. In our example above, we demonstrate cosine similarity between the words "cat" and "feline" in a 3-dimensional space using a plot. By examining the positions of these two vectors and considering the cosine of the angle between them in the 3D embedding space, we can see that they are very similar, indicating a close semantic meaning.
+A cosine is a trigonometric function of an angle, commonly used in geometry and trigonometry to provide the ratio of the adjacent side to the hypotenuse in a right triangle. **Cosine Similarity** is a mathematical method used to compare two embeddings and determine how similar they are in N-dimensional space. 
 
-<div>&nbsp;</div>
+##### Comparing Vectors (and Embeddings) for Cosine Similarity
+
+In our example above, using the word, "cat" we generated a vector using the tiny version of the BERT model. Now, for demonstration purposes, we can do the same, and produce a vector for the word "feline":
+
+```python
+BERT("cat")     # [0.723, −1.009, 0.567]
+BERT("feline")  # [0.698, -0.987, 0.554]
+```
+For demonstrating cosine similarity between the vectors of these two words, "cat" and "feline" in a 3-dimensional space, we can use a plot of those two vectors. By examining the positions of these two vectors and considering the cosine of the angle between them in the 3D embedding space, we can see that they are very similar, indicating a close semantic meaning.
+
 <div>&nbsp;</div>
 
 > Using the metric of **Cosine Similarity**, we can discern that embeddings for semantically similar terms, like "cat" and "feline", have a high degree of similarity in their representation.
