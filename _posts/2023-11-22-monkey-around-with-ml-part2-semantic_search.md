@@ -31,7 +31,7 @@ If you'd like to explore this dataset for your own ML project, it's possible to 
 
 > In a nutshell, semantic search is “search with meaning”. 
 
-https://www.nowpublishers.com/article/Details/INR-032
+[www.nowpublishers.com/article/Details/INR-032](https://www.nowpublishers.com/article/Details/INR-032)
 
 Semantic search differs significantly from traditional keyword searches, in that it allows for matching documents that are semantically similar to the query. Keyword searching on the other hand relies on literal lexical matching of words. While keyword searching is very important for matching proper names, places, entities, etc, semantic search offers the ability to link other documents on contextual meaning
 
