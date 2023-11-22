@@ -37,23 +37,23 @@ Semantic search differs significantly from traditional keyword searches, in that
 
 For example, consider these newspaper headlines (they're **not** from Newsdex in case you were wondering):
 
-> "Advancements in Space Exploration in 2021"
-
-> "2021: A Year of Space Exploration"
-
-> "NASA's Breakthroughs in Martian Terrain Analysis"
-
-> "New Horizons Probe Reveals Secrets of Pluto"
-
+```python
+[
+    "Advancements in Space Exploration in 2021",
+    "2021: A Year of Space Exploration",
+    "NASA's Breakthroughs in Martian Terrain Analysis",
+    "New Horizons Probe Reveals Secrets of Pluto",
+]
+```
 A user performs a keyword search query of:
 
-```text
- "Space exploration advancements in 2021"
+```python
+"Space exploration advancements in 2021"
 ```
 
 Results may include the first two titles:
-- **"Advancements in Space Exploration in 2021"** 
-- **"2021: A Year of Space Exploration"** 
+- "Advancements in Space Exploration in 2021" 
+- "2021: A Year of Space Exploration"
 
 The last two do not contain any of the literal search terms in the query, so they may be missed entirely even though they may still offer significant value to the user.
 
@@ -67,10 +67,10 @@ Embeddings are essentially a mathematical representation of the input that creat
 
 1. All documents in the dataset -- newspaper headlines in this case -- are transformed into embeddings using an AI model. 
 
-    > **Note:** It's important to mention here that creating these embeddings is a resource-intense processing task. While this task *can* be completed on general purpose CPUs, for larger datasets -- such as Newsdex -- the process isn't feasible unless GPU(s) are used. For example, creating embeddings for 10k headlines using one of the more basic AI models was expected to take over 3 hours using an AMD Ryzen 7 CPU. Using an Nvidia Tesla T4 GPU, 1.8M headlines were able to be transformed into embeddings in under 30 minutes. More complex and capable models, combined with larger amounts of "tokens" or words only increase the amount of resources needed.
+    > **Note:** It's important to mention here that creating these embeddings is a resource-intense processing task. While this task *can* be completed on general purpose CPUs, for larger datasets -- such as Newsdex -- the process isn't feasible unless GPU(s) are used. GPUs are preferred in machine learning tasks primarily for their parallel processing capabilities -- CPUs can handle multiple tasks at once with their multi-core architectures, but GPUs excel with their hundreds to thousands of cores that can efficiently make the computations required in ML algorithms. For example, creating embeddings for 10k headlines using one of the more basic AI models was expected to take over 3 hours using an AMD Ryzen 7 CPU. Using an Nvidia Tesla T4 GPU, 1.8M headlines were able to be transformed into embeddings in under 30 minutes. More complex and capable models, combined with larger amounts of "tokens" or words in larger datasets only increase the amount of resources needed.
     {: .prompt-tip}
 
-    ![This image displays a bar chart titled 'Time Required to Process 1.8 Million Headlines.' It compares the processing time of a CPU versus a GPU for handling 1.8 million records. The chart has two vertical bars, each representing one of the processing methods. The X-axis labels the processing methods as 'CPU' and 'GPU.' The Y-axis indicates the time required in minutes, ranging from 0 to over 5,400 minutes. The first bar, colored blue, represents the CPU. It extends upwards to indicate a processing time of 5,400 minutes. The second bar, colored green, represents the GPU and shows a significantly shorter processing time of just 30 minutes. This visual contrast starkly illustrates the substantial efficiency gain when using a GPU compared to a CPU for processing large datasets. The chart effectively conveys the message that a GPU is much faster than a CPU for this task, processing the same volume of data in a fraction of the time.](/time-to-process-1_8million_records.png "read banned books"){: .w-100 .right width="1024" height="768"}
+    ![This image displays a bar chart titled 'Time Required to Process 1.8 Million Headlines.' It compares the processing time of a CPU versus a GPU for handling 1.8 million records. The chart has two vertical bars, each representing one of the processing methods. The X-axis labels the processing methods as 'CPU' and 'GPU.' The Y-axis indicates the time required in minutes, ranging from 0 to over 5,400 minutes. The first bar, colored blue, represents the CPU. It extends upwards to indicate a processing time of 5,400 minutes. The second bar, colored green, represents the GPU and shows a significantly shorter processing time of just 30 minutes. This visual contrast starkly illustrates the substantial efficiency gain when using a GPU compared to a CPU for processing large datasets. The chart effectively conveys the message that a GPU is much faster than a CPU for this task, processing the same volume of data in a fraction of the time.](/time-to-process-1_8million_records.png "time to process 1.8M records"){: .w-100 .right width="1024" height="768"}
     
 2. Embeddings are stored in a vector database. A vector database -- such as Qdrant (https://qdrant.tech/) -- indexes, and provides other methods for quickly searching for vectors presenting the closest semantic similarity for example.
 
