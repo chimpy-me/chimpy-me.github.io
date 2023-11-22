@@ -33,7 +33,7 @@ If you'd like to explore this dataset for your own ML project, it's possible to 
 
 [www.nowpublishers.com/article/Details/INR-032](https://www.nowpublishers.com/article/Details/INR-032)
 
-Semantic search differs significantly from traditional keyword searches, in that it allows for matching documents that are semantically similar to the query. Keyword searching on the other hand relies on literal lexical matching of words. While keyword searching is very important for matching proper names, places, entities, etc, semantic search offers the ability to link other documents on contextual meaning
+Semantic search differs significantly from traditional keyword searches, in that it allows for matching documents that are semantically similar to the query. Keyword searching on the other hand relies on literal lexical matching of words. While keyword searching is very important for matching proper names, places, entities, etc, semantic search offers the ability to link other documents on contextual meaning.
 
 For example, consider these newspaper headlines (they're **not** from Newsdex in case you were wondering):
 
@@ -56,6 +56,8 @@ Results may include the first two titles:
 - "2021: A Year of Space Exploration"
 
 The last two do not contain any of the literal search terms in the query, so they may be missed entirely even though they may still offer significant value to the user.
+
+Using semantic searching, all four of these articles would likely be returned to the user as they're all semantically similar -- the fact that they don't all share the same keywords doesn't matter with this approach.
 
 ## How is Semantic Search Performed?
 
