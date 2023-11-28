@@ -61,7 +61,7 @@ Using semantic searching, all four of these articles would likely be returned to
 
 ## How is Semantic Search Performed?
 
-Semantic search is made possible by the use of AI models that can generate output that represent things that humans can easily recognize -- the intent, context, meaning of something such as a newspaper headline. This is done by creating what are known as "embeddings" or "vector embeddings" (see this post -- [Monkey Around With ML and Library Data Part 1](/blog/posts/monkey-around-with-ml/) -- for a brief review)  
+Semantic search is made possible by the use of AI models that can generate output that represent things that humans can easily recognize -- the intent, context, meaning of something such as a newspaper headline. This is done by creating what are known as "embeddings" or "vector embeddings" (see this post -- [Monkey Around With ML and Library Data Part 1](/blog/posts/monkey-around-with-ml/) -- for a brief review).
 
 Embeddings are essentially a mathematical representation of the input that creates semantic meaning for the AI model. These embeddings are able to be compared to other embeddings -- finding how similar, or dissimilar they are to one another. To perform a query, an embedding must first be created for it. The embedding is then compared to other embeddings which are often stored in what are known as "vector databases" that offer indexing and efficient searches for this purpose.
 
@@ -82,6 +82,6 @@ Embeddings are essentially a mathematical representation of the input that creat
 
 ## Conclusion
 
-In this post, we've briefly scratched the surface with an overview of what semantic search can offer in terms of a creating a more nuanced, context-aware approach to discovery of library resources. In an upcoming post, I'll cover some more of the technical aspects and how we can use some open source tools to work with our headlines, and then perform some semantic searches. 
+In this post, we've briefly explored what semantic search can offer in terms of a creating a more nuanced, context-aware approach to discovery of library resources. In an upcoming post, I'll cover some more of the technical aspects and how we can use open source tools to work with our headlines, and then perform some semantic searches. 
 
 The goal will be to produce a simple web interface where patrons can perform semantic searches for themselves.

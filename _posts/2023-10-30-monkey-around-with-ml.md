@@ -11,13 +11,13 @@ author: <ray_voelker>
 pin: false
 ---
 
-In this post -- and posts to follow -- I'm going to be documenting what I learn about this curren generation of Machine Learning and how it may be applied to some areas specifically involving library data.
+In this post -- and posts to follow -- I'm going to be documenting what I learn about this current generation of Machine Learning and how it may be applied to library data.
 
-I'm going to take a look at some of the history behind areas of AI and machine learning, and again, hopefully, we can apply that history and background to that same type of work being done in libraries in the past, and today.
+I'm going to take a look at some of the history behind areas of AI and machine learning, and hopefully we can apply that history and background to that same type of work being done in libraries in the past and today.
 
 ## Why Such a Sudden and Broad Interest in AI?
 
-Firstly, let's take a look at the where things are today with artificial intelligence. Things are moving VERY fast in this space as of this writing. Why is this? Chat-GPT seems to be the most obvious answer to that question, but what is ChatGPT exactly, and what makes it so exciting to so many?
+Firstly, let's take a look at the where things are today with artificial intelligence. Things are moving VERY fast in this space as of this writing. Why is this? ChatGPT seems to be the most obvious answer to that question, but what is ChatGPT exactly, and what makes it so exciting and/or alarming to so many?
 
 The "GPT" in ChatGPT stands for: Generative Pre-trained Transformer. The "Chat" is simply the interface -- which is arguably what truly put this AI architecture on the map, making it practically a household name.
 
@@ -27,29 +27,30 @@ To define what all this means exactly, we'll start by defining some terms you ma
 
 ## Terms
 
-Below is my attempt to define some terminology to provide an overview and establish a foothold in our learning.
+Below is my attempt to define some terminology and provide an overview and establish a foothold in our learning.
 
 ### Natural Language Processing (NLP)
 
 NLP is a subfield of AI that focuses on the interaction between computers, and natural languages both spoken and written by humans.
 
-The goal of NLP is to enable machines to understand, interpret, and generate responses to human language in such a way that systems can leverage it to extract meaning, answer questions, or provide other valuable insights from text (and other types of information that may carry meaning).
+The goal of NLP is to enable machines to understand, interpret, and generate responses to human language. This is done in such a way that systems can leverage it to extract meaning, answer questions, or provide other valuable insights from text (and other types of information -- such as photos and audio -- that may carry meaning).
 
 Some specific tasks for NLP include
 
-* **Translation**: English to German, French, etc.
+* **Translation**: Converting one language to another -- English to German, French, etc.
 * **Sentiment Analysis**: Determine if an input text is positive or negative. e.g. A review, or a social media post.
-* **Named Entity Recognition (NER)** : Identify a personal name, or physical location name in text.
-* Question Answering: From a natural language query, provides answers, or summaries about the given input text.
+* **Named Entity Recognition (NER)** : Identify a personal name, or physical location name, in text.
+* **Question Answering**: From a natural language query (e.g. a question written in English) answers or simple word/sentence completions are outputted from a given input text.
+* **Summarization**: Input text is condensed down and made more succinct -- similar to an abstract in an academic paper.
 
 > **Natural Language Processing (NLP)** enables computers to understand, interpret, and generate human language in a way that is both meaningful and useful.
 {: .prompt-tip}
 
 ### Models
 
-A model in the context of machine learning and AI is a computational representation that captures patterns, relationships, or meaning from data. Models are pre-trained using algorithms acting on a dataset -- often VERY large datasets -- allowing the model to later make predictions or decisions without being explicitly programmed for the task being given. Once trained, a model can generalize its knowledge to new, unseen data.
+A machine learning model is a computational representation that captures patterns, relationships, or meaning from data. Models are pre-trained using algorithms acting on a dataset -- **often VERY large datasets.** This allows the model to make ongoing predictions or ouputs without being explicitly programmed for the task. In other words, once trained, a model can generalize its knowledge to new, unseen data.
 
-> **Models** are, in essence, a way for a systems to encapsulate what has been learned from data, and later re-apply that previous learning to new and unseen data
+> **Models** are, in essence, a way for a system to encapsulate what has been learned from data, and later re-apply that previous learning to unseen data
 {: .prompt-tip}
 
 ### Transformer
@@ -97,7 +98,7 @@ Embeddings are very similar, but are subtly different from vectors. In terms of 
 
 Items that are semantically or contextually similar will have embeddings that are close to each other in the vector space.
 
-Let's say we're using a tiny version of BERT that produces embeddings in 3-dimensional space (in reality, BERT embeddings are much higher-dimensional). Given the word "cat" in a sentence, the BERT model might produce an embedding like:
+Let's say we're using a tiny version of BERT that produces embeddings in 3-dimensional space (in reality, BERT dimensional embeddings are much higher). Given the word "cat" in a sentence, the BERT model might produce an embedding like:
 
 ```python
 BERT("cat")  # [0.723, −1.009, 0.567]
@@ -130,7 +131,7 @@ A cosine is a trigonometric function of an angle, commonly used in geometry and 
 
 ##### Comparing Vectors (and Embeddings) for Cosine Similarity
 
-In our example above, using the word, "cat" we generated a vector using the tiny version of the BERT model. Now, for demonstration purposes, we can do the same, and produce a vector for the word "feline":
+In our example above, using the word "cat", we generated a vector using the tiny version of the BERT model. Now, for demonstration purposes, we can do the same, and produce a vector for the word "feline":
 
 ```python
 BERT("cat")     # [0.723, −1.009, 0.567]
@@ -145,4 +146,4 @@ For demonstrating cosine similarity between the vectors of these two words, "cat
 
 ## Conclusion of Part 1
 
-I plan on continuing with this exploration on a somewhat regular basis. However, if you're eager to go deeper right now, I highly recommend exploring the works of Simon Willison. One particularly insightful blog post of his is "[Embeddings: What they are and why they matter](https://simonwillison.net/2023/Oct/23/embeddings/)", where he provides slides and a video from one of his amazingly insightful talks on transformer-based models. Another increadible talk from Simon can be found in his post titled "[Making Large Language Models work for you](https://simonwillison.net/2023/Aug/27/wordcamp-llms/)". A big "thanks" to Simon for making this topic more accessible and for his ongoing efforts in creating tools that make data exploration both fun and interesting!
+I plan on continuing with this exploration on a somewhat regular basis. However, if you're eager to go deeper right now, I highly recommend exploring the works of Simon Willison. One particularly insightful blog post of his is "[Embeddings: What they are and why they matter](https://simonwillison.net/2023/Oct/23/embeddings/)", where he provides slides and a video from one of his amazingly insightful talks on transformer-based models. Another incredible talk from Simon can be found in his post titled "[Making Large Language Models work for you](https://simonwillison.net/2023/Aug/27/wordcamp-llms/)". A big "thanks" to Simon for making this topic more accessible and for his ongoing efforts in creating tools that make data exploration both fun and interesting!
